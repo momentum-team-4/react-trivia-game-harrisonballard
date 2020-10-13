@@ -6,7 +6,7 @@ function App () {
   const [triviaCategories, setTriviaCategories] = useState([])
   const fetchData = async () => {
     const response = await axios.get('https://opentdb.com/api_category.php')
-    setTriviaCategories(response.data)
+    setTriviaCategories(response.data.trivia_categories)
   }
   console.log(triviaCategories)
 
