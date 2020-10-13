@@ -3,11 +3,12 @@ import './App.css'
 import axios from 'axios'
 
 function App () {
-  const [triviaCategories, setTriviaCategories] = useState(null)
+  const [triviaCategories, setTriviaCategories] = useState([])
   const fetchData = async () => {
     const response = await axios.get('https://opentdb.com/api_category.php')
-    setTriviaCategories(response.data)
+    setTriviaCategories(response.data.trivia_categories)
   }
+  console.log(triviaCategories)
 
   return (
     <>
@@ -22,18 +23,14 @@ function App () {
         </div>
 
         {/* Display fetched data on page */}
-        <div className="triviaCategories">
-          {triviaCategories && triviaCategories.map((triviaCategory, index) => {
-            const category = triviaCategories.name
-            console.log(category)
-
+        <div className='triviaCategories'>
+          {triviaCategories.map((triviaCategory, index) => {
             return (
-              <div className='triviaCategory' key={index}>
-                <h1>Category {index + 1}</h1>
-                <h2>{triviaCategory.name}</h2>
-              </div>
-            )
-          })}
+              <p key={`${triviaCategory.name}`}>
+                {triviaCategory.name}
+              </p>
+            ) }
+          )}
         </div>
       </div>
     </>
